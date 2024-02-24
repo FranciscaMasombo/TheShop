@@ -9,7 +9,7 @@ describe('The Shop tests spec', () => {
 
   // test case one
   // Error with filter as the filter is not in order 
-  it('1.Shop-Filter By Price Functionality	', () => {
+  it('Shop-Filter By Price Functionality', () => {
     cy.xpath('//*[@id="woocommerce_price_filter-2"]/form/div/div[2]/div[1]/span[2]').invoke('text', '₹450'); // set price to 150 to450
     cy.wait(2000) // wait for the new price to load 
     cy.xpath('//*[@id="woocommerce_price_filter-2"]/form/div/div[2]/button').click(); // click filter to load results 
