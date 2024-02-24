@@ -4,11 +4,12 @@
   "description": "The Shop testing ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "cy:run": "cypress run"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^13.6.6"
+    "cypress": "^13.6.6",
+    "cypress-xpath": "^2.0.1"
   }
 }
