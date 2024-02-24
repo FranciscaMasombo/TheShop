@@ -17,7 +17,8 @@ Add require('cypress-xpath') to support/e2e.js
  "scripts": {
     "cy:run": "cypress run"
   }
-Use npx cypress run to run tests 
+# Use the following to run test in Shop folder in Terminal 
+npx cypress run 
 
 
 ```
