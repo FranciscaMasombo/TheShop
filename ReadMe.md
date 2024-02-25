@@ -2,8 +2,6 @@
 
 ## Install Dependencies:
 ```bash
-npm install
-npm init -y
 npm install --save-dev cypress
 ``` 
 
