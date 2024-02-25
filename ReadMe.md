@@ -1,6 +1,6 @@
 # Project Setup:
 
-### Install Dependencies:
+## Install Dependencies:
 ```bash
 npm install
 npm init -y
@@ -11,27 +11,51 @@ npm install --save-dev cypress
 ```bash
 npx cypress open
 ```
+- Select "E2E testing."
+- Click "Continue."
+- Make sure to select a browser to run the test in.
+- Create a new spec and start coding.
 
-# Then run npx cypress open 
-Then select E2E testing after that select the Continue button make sure you select a browser to run the test in. Create new spec and start coding.
-
-# Add /// <reference types="Cypress" /> to support/commands.js in order to use Cypress libriary 
-
-# In order to use xpath install cypress xpath (element selecter)
-npm install -D cypress-xpath
-Add require('cypress-xpath') to support/e2e.js 
-
-# To run tests for all specs or from a single spec file add the following to package.json
- "scripts": {
-    "cy:run": "cypress run"
-  }
-# Use the following to run test in Shop folder in Terminal 
-npx cypress run 
-
-# Usage with mochawesome for reporting 
-npm install --save-dev mochawesome
-Add   reporter: 'mochawesome', to cypress.config.js
-To view report open this file in your browser by copying the path and pastting browser../SHOP/mochawesome-report/mochawesome.html 
-
-
+### Cypress libriary :
+```bash
+Add the following to support/commands.js in order to use Cypress libriaries 
+ /// <reference types="Cypress" /> 
 ```
+### Configure for XPath:
+Install Cypress XPath (element selector):
+```bash
+npm install -D cypress-xpath
+```
+Add the following to support/e2e.js:
+```bash
+require('cypress-xpath');
+```
+### Run Tests:
+Add the following script to your package.json:
+```bash
+"scripts": {
+  "cy:run": "cypress run"
+}
+```
+Run tests for all specs or from a single spec file:
+```bash
+npx cypress run
+```
+### Usage with Mochawesome for Reporting:
+Install Mochawesome:
+```bash
+npm install --save-dev mochawesome
+```
+Add the following to cypress.config.js:
+```bash
+module.exports = {
+  // ... other configurations
+  reporter: 'mochawesome',
+};
+```
+To view the report, open the generated file in your browser by copying the path and pasting it in your browser:
+```bash
+.../SHOP/mochawesome-report/mochawesome.html
+```
+Or by opening with live server in vscode 
+
