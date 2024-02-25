@@ -4,7 +4,7 @@
   "description": "The Shop testing ",
   "main": "index.js",
   "scripts": {
-    "cy:run": "cypress run",
+    "cy:run": "cypress run"
   },
   "author": "",
   "license": "ISC",
