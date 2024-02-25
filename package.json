@@ -9,7 +9,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@cypress/code-coverage": "^3.12.24",
     "cypress": "^13.6.6",
-    "cypress-xpath": "^2.0.1"
+    "cypress-xpath": "^2.0.1",
+    "mochawesome": "^7.1.3"
   }
 }

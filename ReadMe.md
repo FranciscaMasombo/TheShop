@@ -20,5 +20,10 @@ Add require('cypress-xpath') to support/e2e.js
 # Use the following to run test in Shop folder in Terminal 
 npx cypress run 
 
+# Usage with mochawesome for reporting 
+npm install --save-dev mochawesome
+Add   reporter: 'mochawesome', to cypress.config.js
+
+
 
 ```
