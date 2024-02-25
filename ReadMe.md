@@ -1,8 +1,16 @@
-## Project Setup:
-``` npm
+# Project Setup:
+
+### Install Dependencies:
+```bash
 npm install
-npm -i init
+npm init -y
 npm install --save-dev cypress
+``` 
+
+### Run Cypress:
+```bash
+npx cypress open
+```
 
 # Then run npx cypress open 
 Then select E2E testing after that select the Continue button make sure you select a browser to run the test in. Create new spec and start coding.
@@ -23,7 +31,7 @@ npx cypress run
 # Usage with mochawesome for reporting 
 npm install --save-dev mochawesome
 Add   reporter: 'mochawesome', to cypress.config.js
-
+To view report open this file in your browser by copying the path and pastting browser../SHOP/mochawesome-report/mochawesome.html 
 
 
 ```

@@ -14,7 +14,7 @@ describe('The Shop tests spec', () => {
   });
 
   // Error with filter as the filter is not in order 
-  it('1.Shop-Filter By Price Functionality', () => {
+  it('1. Shop-Filter By Price Functionality', () => {
     cy.xpath('//*[@id="woocommerce_price_filter-2"]/form/div/div[2]/div[1]/span[2]').invoke('text', '₹450'); // set price to 150 to450
     cy.wait(2000) // wait for the new price to load 
     cy.xpath('//*[@id="woocommerce_price_filter-2"]/form/div/div[2]/button').click(); // click filter to load results 
@@ -156,7 +156,7 @@ describe('The Shop tests spec', () => {
     });
 
   })
-
+  // test could be split to two to test tax for India and another to test any other country
   it('11.Shop-Add to Basket-View Basket through Item link', () => {
     cy.get('.products').should('be.visible'); // are the products showing
     cy.contains('Add to basket').first().click(); // Click on the "Add to Basket" button for a book
@@ -226,9 +226,6 @@ describe('The Shop tests spec', () => {
     cy.get('#select2-chosen-1').type('Republic of Ireland');
     cy.xpath('//*[@id="select2-result-label-433"]').click();
     cy.wait(1000);
-    cy.get('#billing_address_1').type('Waterford');
-    cy.get('#billing_city').type('Waterford');
-    cy.get('#billing_state').type('Waterford');
 
     // then you need to check the tax rate adds is correct for Ieland It sshould be 5%
     // Verify total and subtotal values
@@ -283,9 +280,13 @@ describe('The Shop tests spec', () => {
 
       });
     });
-
-
   })
 
+  it('should verify product count for Android category', () => {
+    cy.xpath('//*[@id="woocommerce_product_categories-2"]/ul/li[1]').click(); // Click on the Android category
+    cy.wait(1500)
+    // Verify the count of products for Android category
+    cy.xpath('//*[@id="content"]/ul').should('have.length', 1);
+  });
 
 })
