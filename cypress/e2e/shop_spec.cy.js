@@ -100,8 +100,8 @@ describe('The Shop tests spec', () => {
 
   it('9.Shop-Sale Functionality', () => {
     cy.get('.products').should('be.visible'); // are the products showing
-    // click on the product with "Sale" sticker 
-    cy.contains('.products .onsale', 'Sale').click();
+    cy.contains('.products .onsale', 'Sale').click(); // click on the product with "Sale" sticker 
+
     // look at the sale price with old price 
     cy.xpath('//*[@id="product-169"]/div[2]/div[1]/p/del/span').invoke('text').then((oldPrice) => {
       cy.xpath('//*[@id="product-169"]/div[2]/div[1]/p/ins/span').invoke('text').then((newPrice) => {
@@ -109,22 +109,26 @@ describe('The Shop tests spec', () => {
         expect(parseFloat(oldPrice.replace('₹', ''))).to.be.greaterThan(parseFloat(newPrice.replace('₹', ''))); // old price should be high than the new 
       });
     });
+
   })
 
   it('10.Shop-Add to Basket-View Basket Functionality', () => {
-    cy.get('.products').should('be.visible'); // are the products showing
-    cy.contains('Add to basket').first().click(); //add the first book to basket 
+    cy.get('.products').should('be.visible'); // Are the products showing
+    cy.contains('Add to basket').first().click();  // Click on the "Add to Basket" button for a book
     cy.contains('Basket').click(); // view basket
 
     // Verify total and subtotal values
     cy.xpath('//*[@id="page-34"]/div/div[1]/div/div/table/tbody/tr[1]/td/span').invoke('text').then((subtotal) => {
       cy.xpath('//*[@id="page-34"]/div/div[1]/div/div/table/tbody/tr[3]/td/strong/span').invoke('text').then((total) => {
         cy.log(`subtotal: ${subtotal}, total: ${total}`); // log the prices    
-        expect(parseFloat(subtotal.replace('₹', ''))).to.be.lessThan(parseFloat(total.replace('₹', '')));   //total is less than subtotal
+        //total is less than subtotal
+        expect(parseFloat(subtotal.replace('₹', ''))).to.be.lessThan(parseFloat(total.replace('₹', '')));
       });
+
       cy.wait(1500);
       cy.xpath('//*[@id="page-34"]/div/div[1]/div/div/div/a').click();// Click on proceed to checkout button
       cy.wait(500);
+
       // fill in billing details form
       cy.get('#billing_first_name').type('Sarah');
       cy.get('#billing_last_name').type('Smith');
@@ -137,7 +141,7 @@ describe('The Shop tests spec', () => {
       cy.get('#billing_city').type('Waterford');
       cy.get('#billing_state').type('Waterford');
 
-      cy.get('#payment_method_bacs').check(); //select the payment method Direct Bank Transfer
+      cy.get('#payment_method_bacs').check(); // Select the payment method Direct Bank Transfer
       cy.wait(1500);
       cy.contains('Place order').click();
 
@@ -155,14 +159,10 @@ describe('The Shop tests spec', () => {
 
   it('11.Shop-Add to Basket-View Basket through Item link', () => {
     cy.get('.products').should('be.visible'); // are the products showing
-    // Click on the "Add to Basket" button for a book
-    cy.contains('Add to basket').first().click();
+    cy.contains('Add to basket').first().click(); // Click on the "Add to Basket" button for a book
 
-    // Verify that the book is added to the basket
-    cy.get('.cartcontents').should('contain', '1 item');
-
-    // Click on the "Basket" link
-    cy.contains('Basket').click();
+    cy.get('.cartcontents').should('contain', '1 item');   // Verify that the book is added to the basket
+    cy.contains('Basket').click(); // view basket
 
     // Verify total and subtotal values
     cy.get('.cart-subtotal .amount').invoke('text').then((subtotal) => {
@@ -172,9 +172,9 @@ describe('The Shop tests spec', () => {
       });
     });
     cy.wait(1500);
-
     cy.xpath('//*[@id="page-34"]/div/div[1]/div/div/div/a').click();// Click on proceed to checkout button
     cy.wait(500);
+
     // fill in billing details form 
     cy.get('#billing_first_name').type('Sarah');
     cy.get('#billing_last_name').type('Smith');
@@ -199,18 +199,13 @@ describe('The Shop tests spec', () => {
     cy.xpath('//*[@id="page-35"]/div/div[1]/table/tfoot/tr[3]/td').should('be.visible');
     cy.xpath('//*[@id="page-35"]/div/div[1]/table/tfoot/tr[3]/td').should('include.text', 'Direct Bank Transfer');
 
-
   })
   it('12. Shop-Add to Basket-View Basket-Tax Functionality', () => {
     cy.get('.products').should('be.visible'); // are the products showing
-    // Click on the "Add to Basket" button for a book
-    cy.contains('Add to basket').first().click();
+    cy.contains('Add to basket').first().click(); // Click on the "Add to Basket" button for a book
 
-    // Verify that the book is added to the basket
-    cy.get('.cartcontents').should('contain', '1 item');
-
-    // Click on the "Basket" link
-    cy.contains('Basket').click();
+    cy.get('.cartcontents').should('contain', '1 item');   // Verify that the book is added to the basket
+    cy.contains('Basket').click(); // view basket
 
     // Verify total and subtotal values
     cy.get('.cart-subtotal .amount').invoke('text').then((subtotal) => {
@@ -220,9 +215,9 @@ describe('The Shop tests spec', () => {
       });
     });
     cy.wait(1500);
-
     cy.xpath('//*[@id="page-34"]/div/div[1]/div/div/div/a').click();// Click on proceed to checkout button
     cy.wait(500);
+
     // fill in billing details form 
     cy.get('#billing_first_name').type('Sarah');
     cy.get('#billing_last_name').type('Smith');
@@ -242,13 +237,43 @@ describe('The Shop tests spec', () => {
         cy.get('.tax-rate  .amount').invoke('text').then((tax) => {
           // log the prices diff   
           cy.log(`subtotal: ${subtotal}, total: ${total}, tax: ${tax}`);
+
           // the subtotal shound be less that the total 
           // numeric value from the subtotal and total strings
           expect(parseFloat(subtotal.replace('₹', ''))).to.be.lessThan(parseFloat(total.replace('₹', '')));
+
           // calculate the expected tax (5% of subtotal)
           const taxAmount = parseFloat(tax.replace('₹', ''));
           const subtotalAmount = parseFloat(subtotal.replace('₹', ''));
-          const expectedTax = (5 / 100) * subtotalAmount;
+          const expectedTax = (5 / 100) * subtotalAmount; // 5% of the Subtotal amount 
+          cy.log(`Calulated Tax: ${expectedTax}`)
+          cy.wait(1000);
+          expect(taxAmount).to.equal(expectedTax); // the calculated tax should equal the tax inthe tax field 
+          cy.log(`Calulated Tax: ${expectedTax}, Tax in field: ${taxAmount}`);
+        });
+      });
+    });
+
+
+    // then you need to check the tax rate adds is correct for India It sshould be 2%
+    cy.get('#select2-chosen-1').type('India'); // select India
+    cy.xpath('//*[@id="select2-result-label-891"]').click(); // dropdown select 
+    cy.wait(1000);
+
+    // then you need to check the tax rate adds is correct for India It sshould be 2%
+    // Verify total and subtotal values
+    cy.get('.cart-subtotal .amount').invoke('text').then((subtotal) => {
+      cy.get('.order-total .amount').invoke('text').then((total) => {
+        cy.get('.tax-rate  .amount').invoke('text').then((tax) => {
+          // log the prices diff   
+          cy.log(`subtotal: ${subtotal}, total: ${total}, tax: ${tax}`);
+          // the subtotal shound be less that the total 
+          // numeric value from the subtotal and total strings
+          expect(parseFloat(subtotal.replace('₹', ''))).to.be.lessThan(parseFloat(total.replace('₹', '')));
+          // calculate the expected tax (2% of subtotal)
+          const taxAmount = parseFloat(tax.replace('₹', ''));
+          const subtotalAmount = parseFloat(subtotal.replace('₹', ''));
+          const expectedTax = (2 / 100) * subtotalAmount;
           cy.log(`Calulated Tax: ${expectedTax}`)
           cy.wait(1000);
           expect(taxAmount).to.equal(expectedTax);
@@ -258,6 +283,7 @@ describe('The Shop tests spec', () => {
 
       });
     });
+
 
   })
 
